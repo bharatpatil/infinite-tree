@@ -1,0 +1,35 @@
+/* eslint no-var: 0 */
+var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+    cache: true,
+    debug: true,
+    devtool: 'eval',
+    entry: {
+        app: path.resolve('src/index.js')
+    },
+    output: {
+        path: path.join(__dirname),
+        filename: '[name].bundle.js'
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'babel',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015', 'stage-0']
+                }
+            }
+        ]
+    },
+    plugins: [
+    ],
+    resolveLoader: {
+        modulesDirectories: [
+            path.resolve(__dirname, '../node_modules')
+        ]
+    }
+};
