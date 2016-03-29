@@ -6,12 +6,10 @@ module.exports = {
     cache: true,
     debug: true,
     devtool: 'eval',
-    entry: {
-        app: path.resolve('src/index.js')
-    },
+    entry: path.resolve('index.js'),
     output: {
-        path: path.join(__dirname),
-        filename: '[name].bundle.js'
+        path: path.join(__dirname, '..'),
+        filename: 'bundle.js'
     },
     module: {
         loaders: [
@@ -26,10 +24,6 @@ module.exports = {
         ]
     },
     plugins: [
-    ],
-    resolveLoader: {
-        modulesDirectories: [
-            path.resolve(__dirname, '../node_modules')
-        ]
-    }
+        new webpack.optimize.UglifyJsPlugin({ minimize: true })
+    ]
 };
