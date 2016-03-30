@@ -8,13 +8,27 @@ for (var i = 0; i < 1000; ++i) {
 }
 
 var tree = new InfiniteTree({
+    autoOpen: true,
     el: document.querySelector('#tree'),
-    data: data,
-    autoOpen: true
+
+    // Customize your row renderer
+    /*
+    rowRenderer: (node) => {
+        return '<div>' + node.label + '</div>'
+    }
+    */
 });
 
-window.tree = tree;
+tree.on('tree.open', (node) => {
+    console.log('tree.open', node);
+});
+tree.on('tree.close', (node) => {
+    console.log('tree.close', node);
+});
+tree.on('tree.select', (node) => {
+    console.log('tree.select', node);
+});
 
-// API
-// node = tree.getNodeById();
-// tree.selectNode();
+tree.loadData(data);
+
+window.tree = tree;
